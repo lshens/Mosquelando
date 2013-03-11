@@ -1,0 +1,33 @@
+.navbar {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.logo-img {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    height: 300px;
+    width: 880px;
+}
+
+#header{
+    width: 940px;
+}
+
+#footer{
+    height: 70px;
+    width: 940px;
+}
+
+#content {
+    height:580px;
+    width: 940px ;
+}
+
+body{
+
+}
+/*table thead th.border{ border: solid;}*/
