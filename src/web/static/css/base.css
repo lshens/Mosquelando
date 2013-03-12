@@ -2,6 +2,7 @@
     padding-top: 10px;
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 0px;
 }
 
 .logo-img {
@@ -24,6 +25,7 @@
 }
 
 #content {
+    padding-top: 5px;
     height:580px;
     width: 880px ;
 }
