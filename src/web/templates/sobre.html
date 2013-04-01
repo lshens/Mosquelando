@@ -1,9 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "/templates/base.html" %}
+{% block navbar %}{{ create_navbar("SOBRE") }} {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span2"></div>
+        <div class="span6"><h1 >Um breve resumo</h1></div>
+    </div>
+    <div class="row">
+        <div class="span2"></div>
+        <div class="span5">
+            <p>
+            Este site/blog é voltado a todos que possuí criatividade para desenvolver uma boa tirinha, como todos sabem o <strong>HUMOR</strong> é algo que nós ajuda a viver mais. Pensando nisto que o autor deste site (Lucas Shen dos Santos), criou e disponibilizou este lindo projeto. Porém lembre-se que vocês são responsáveis por aquilo que desenvolvem e comentam aqui no <strong>MOSQUELANDO</strong>
+            </p>
+        </div>
+        <div class="span4">
+            <img src="/static/img/autor.jpg" class="img-polaroid">
+        </div>
+    </div>
+</div>
+{% endblock %}
