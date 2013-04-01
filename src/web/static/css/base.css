@@ -25,12 +25,14 @@
 }
 
 #content {
-    padding-top: 5px;
-    height:580px;
-    width: 880px ;
+
+ /*   margin: 3px 90px 5px 195px;*/
+    padding: 5px 5px 5px 5px;
+    height:515px;
+    width: 860px ;
 }
 
 body {
-    background-image: url("/../static/img/background.png");
+    background-color: #ffffff;
+   /* background-image: url("/../static/img/background.png");*/
 }
-/*table thead th.border{ border: solid;}*/

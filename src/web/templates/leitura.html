@@ -1,0 +1,19 @@
+{% extends "/templates/base.html" %}
+{% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            <img src="/static/img/tirinha.jpg" border="black">
+        </div>
+    </div>
+    <ul class="pager">
+        <li class="previous">
+            <a href="#">&larr; Older</a>
+        </li>
+        <li class="next">
+            <a href="#">Newer &rarr;</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
