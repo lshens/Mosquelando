@@ -7,7 +7,7 @@
         <div class="span9">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-left" href="#">
+                    <a class="pull-left">
                         <img class="media-object" src="/static/img/fuuu.jpg">
                     </a>
                     <div class="media-body">
@@ -17,7 +17,7 @@
                     </div>
                 </li>
                 <li class="media">
-                    <a class="pull-right" href="#">
+                    <a class="pull-right">
                         <img class="media-object" src="/static/img/okay.jpg">
                     </a>
                 <div class="media-body">
@@ -28,6 +28,17 @@
                         com ela, apenas abaixa a cabeça, fica chateado (ou triste) e diz um simples "Okay".</blockquote>
                 </div>
                 </li>
+                {% for h in historia %}
+                <li class="media">
+                    <a class="pull-left">
+                        <img class="media-object" src="{{ h.key.img_meme }}">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ h.key.titulo }}</h4>
+                        <blockquote>{{ h.key.conteudo }}</blockquote>
+                    </div>
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
