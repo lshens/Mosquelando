@@ -51,3 +51,4 @@ def editar(write_tmpl,urlsafe):
     values = {"save_url":router.to_path(salvar),
               "historia":historia}
     write_tmpl()
+

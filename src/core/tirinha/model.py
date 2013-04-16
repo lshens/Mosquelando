@@ -8,3 +8,4 @@ class Tirinha(ndb.Model):
     img_tirinha=ndb.StringProperty;
     legenda=ndb.StringProperty;
     avalicao=ndb.IntegerProperty;
+    data=ndb.DateTimeProperty;

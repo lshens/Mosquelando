@@ -9,20 +9,21 @@
     padding-top: 10px;
     padding-left: 30px;
     padding-right: 30px;
-
     height: 300px;
     width: 880px;
 }
 
 #content {
-
- /*   margin: 3px 90px 5px 195px;*/
     padding: 5px 5px 5px 5px;
-    height:515px;
-    width: 860px ;
+    height: auto;
+    width: 860px;
+    background-color: #ffffff;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 
 body {
-    background-color: #ffffff;
-   /* background-image: url("/../static/img/background.png");*/
+    /*background-color: #356635;*/
+    background-image: url("/../static/img/background.png");
 }

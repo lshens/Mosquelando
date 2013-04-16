@@ -4,5 +4,5 @@ from web import formulario
 from zen import router
 
 def index(write_tmpl):
-    write_tmpl("/historia/templates/lista.html")
+    write_tmpl("/historia/templates/list.html")
 
