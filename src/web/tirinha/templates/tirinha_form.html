@@ -1,0 +1,25 @@
+{% extends "/templates/base.html" %}
+{% block navbar %}{{ create_navbar("FORM") }} {% endblock %}
+{% block content %}
+{% set tirinha=tirinha or None %}
+<form action="{{ save_url }}" method="post">
+    <div class="input-append">
+        <label>Carregue a imagem: </label>
+        <input class="span2" id="appendedInputButton" type="text" placeholder="Localize o arquivo...">
+        <button class="btn" type="button">Carregar</button>
+    </div>
+    <label>Título: </label>
+    <input type="text" name="titulo" value="{{ tirinha.titulo}}" placeholder="Digite seu nome completo"/><br>
+    <label>E-mail: </label>
+    <input type="email" name="email" value="{{ usuario.email}}" placeholder="ex: mosca@mail.com"/><br>
+    <label>Senha: </label>
+    <input type="password" name="senha" value="{{ usuario.senha}}" maxlength="8" placeholder="Digite senha com 8 caracteres"/><br>
+    <label>Avatar:</label>
+    <input type="text" name="avatar" value="{{ usuario.avatar}}" placeholder="Digite o nome do avatar"/><br>
+    {% if usuario %}
+    <input type="hidden" name="id" value="{{ usuario.id}}"/>
+    {% endif %}
+    <button class="btn btn-success">Salvar</button>
+</form>
+
+{% endblock %}
