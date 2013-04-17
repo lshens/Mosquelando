@@ -1,33 +1,41 @@
+from xmlrpclib import DateTime
+
 __author__ = 'Shen'
 
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
-from core.historia.model import Historia
+from core.tirinha.model import Tirinha
+from datetime import datetime
 from zen import router
 
 def form(write_tmpl):
     values={"save_url":router.to_path(salvar)}
     write_tmpl("/historia/templates/")
 
-def salvar(handler, img_meme,titulo, conteudo, id=None):
+def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, id=None):
     #SE O ID NÃO EXISTIR ELE CRIA UM NOVO ID E REGISTRO
+    data=datetime.today()
     if id:
-        historia = Historia(id=long(id), img_meme=img_meme, titulo=titulo, conteudo=conteudo)
+        avaliacao=long(avaliacao)
+        avaliacao=0
+        tirinha = Tirinha(id=long(id), img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
+                          avaliacao=avaliacao, data=data)
     #SE ELE POSSUIR UM ID, ELE REALIZA UM UPDATE DO RESGISTRO
     else:
-        historia = Historia(img_meme=img_meme, titulo=titulo, conteudo=conteudo)
+        tirinha = Tirinha(img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
+                          avaliacao=long(avaliacao), data=data)
         #SALVA AS ALTERAÇÕES
-    historia.put();
+    tirinha.put();
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
 
 def listar(write_tmpl):
     #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
-    query = Historia.query(Historia.get_by_id>0).order(Historia.get_by_id)
+    query = Tirinha.query(Tirinha.get_by_id>0).order(Tirinha.get_by_id)
     #TRAZ SOMENTE 10 LINHAS DA CONSULTA
-    historia =  query.fetch(10)
+    tirinha =  query.fetch(5)
     #VALORES QUE SERÃO PASSADOS NA URL
-    values = {"historia":historia,
+    values = {"tirinha":tirinha,
               "apagar_url":router.to_path(apagar),
               "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
@@ -35,7 +43,7 @@ def listar(write_tmpl):
 
 def apagar(handler, id):
     #RECEBE O OBJETO MAIS O ID DELE
-    key = ndb.Key(Historia,long(id))
+    key = ndb.Key(Tirinha,long(id))
     #DELETA O REGISTRO
     key.delete()
     #REDIRECIONA PARA A PAGINA LISTAR
@@ -45,8 +53,8 @@ def editar(write_tmpl,urlsafe):
     #
     key =  ndb.Key(urlsafe=urlsafe)
     #PEGA A CHAVE PRIMARIA E ARMAZENA NA HISTORIA
-    historia = key.get()
+    tirinha = key.get()
     #CARREGA O VALORES DA PK E MANDA PARA O SALVAR
     values = {"save_url":router.to_path(salvar),
-              "historia":historia}
+              "tirinha":tirinha}
     write_tmpl()

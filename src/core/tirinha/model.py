@@ -3,7 +3,7 @@ __author__ = 'lucas.shen'
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 
-class Usuario(ndb.Model):
+class Tirinha(ndb.Model):
     titulo_tirinha=ndb.StringProperty;
     img_tirinha=ndb.StringProperty;
     legenda=ndb.StringProperty;

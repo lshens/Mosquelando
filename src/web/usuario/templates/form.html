@@ -1,6 +1,4 @@
-{% extends "/templates/base.html" %}
-{% block navbar %}{{ create_navbar("FORM") }} {% endblock %}
-{% block content %}
+{% block form_user %}
 {% set usuario=usuario or None %}
 <form action="{{ save_url }}" method="post">
     <label>Nome:</label>
@@ -16,5 +14,4 @@
     {% endif %}
     <button class="btn btn-success">Salvar</button>
 </form>
-
 {% endblock %}

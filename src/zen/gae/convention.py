@@ -30,7 +30,8 @@ class BaseHandler(webapp2.RequestHandler):
             return self.response.write(document)
 
         convention_params = {"req": self.request, "resp": self.response,
-                             "handler": self,"write_tmpl":write_template}
+                             "handler": self,"write_tmpl":write_template,
+                             "tmpl":tmpl}
 
 
         try:
@@ -39,6 +40,7 @@ class BaseHandler(webapp2.RequestHandler):
         except PathNotFound:
             logging.error("Path not Found: " + self.request.path)
             self.response.write("Ocorreu um erro, veja o console")
+            #raise Exception()
         except:
             logging.error((fcn, params, kwargs))
             logging.error(traceback.format_exc())

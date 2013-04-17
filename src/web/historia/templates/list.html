@@ -30,11 +30,11 @@
             {% for h in historia %}
             <li class="media">
                 <a class="pull-left">
-                    <img class="media-object" src="{{ h.key.img_meme }}">
+                    <img class="media-object" src="{{ h.img_meme }}">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">{{ h.key.titulo }}</h4>
-                    <blockquote>{{ h.key.conteudo }}</blockquote>
+                    <h4 class="media-heading">{{ h.titulo }}</h4>
+                    <blockquote>{{ h.conteudo }}</blockquote>
                 </div>
             </li>
             {% endfor %}

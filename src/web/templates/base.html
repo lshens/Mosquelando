@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="/static/css/base.css"/>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -22,6 +23,7 @@
                 <li {% if selected_tab=="LISTA" %}class="active" {% endif %}><a href="/lista">Lista Memes</a></li>
                 <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura">Leitura Meme</a></li>
                 <li {% if selected_tab=="SOBRE" %}class="active" {% endif %}><a href="/sobre">Sobre</a></li>
+                <li {% if selected_tab=="FORM" %}class="active" {% endif %}><a href="/formulario">Form</a></li>
                 <li class="divider"></li>
                 <form class="navbar-form pull-left" style="padding-right: 3px; padding-left: 50px;">
                     <input type="text" class="search-query span2" placeholder="Pesquisar">
@@ -39,8 +41,9 @@
     </div>
 </div>
 </div>
-
-{% block content %}{% endblock %}
+<div id="content" class="container">
+    {% block content %}{% endblock %}
+</div>
 
 <div id="footer" class="container">
     {% include "/templates/footer.html" %}
