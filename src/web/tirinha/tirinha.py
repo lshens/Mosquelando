@@ -1,6 +1,4 @@
-from base64 import urlsafe_b64decode
-
-__author__ = 'lucas.shen'
+__author__ = 'Shen'
 
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
@@ -9,6 +7,7 @@ from zen import router
 
 def form(write_tmpl):
     values={"save_url":router.to_path(salvar)}
+    write_tmpl("/historia/templates/")
 
 def salvar(handler, img_meme,titulo, conteudo, id=None):
     #SE O ID NÃO EXISTIR ELE CRIA UM NOVO ID E REGISTRO
@@ -17,7 +16,7 @@ def salvar(handler, img_meme,titulo, conteudo, id=None):
     #SE ELE POSSUIR UM ID, ELE REALIZA UM UPDATE DO RESGISTRO
     else:
         historia = Historia(img_meme=img_meme, titulo=titulo, conteudo=conteudo)
-    #SALVA AS ALTERAÇÕES
+        #SALVA AS ALTERAÇÕES
     historia.put();
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
