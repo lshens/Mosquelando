@@ -1,7 +1,8 @@
 {% extends "/templates/base.html" %}
 {% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
+
 {% block content %}
-{% block form_tirinha %}{% endblock %}
+{% include "/tirinha/templates/tirinha_form.html" %}
 <div class="row">
     <div class="span1"></div>
     <div class="span6">
@@ -9,7 +10,7 @@
         <img src="/static/img/tirinha.jpg" class="img-polaroid">
 
     </div>
-    <div class="span2">
+    <div class="span3">
         <h4>Envie sua Tirinha: </h4>
         <a data-toggle="modal" href="#myModal" class="btn">Enviar</a>
         <h2>Seus ultimos envios:</h2>
@@ -27,8 +28,7 @@
                 <td>key</td>
                 <td>titulo_tirinha</td>
                 <td>avalicao</td>
-                <td colspan="2"><button type="button" class="btn btn-link" >Apagar</button></td>
-                <td><button type="button" class="btn btn-link" >Editar</button></td>
+                <td colspan="2"><a href="#">Apagar</a>/<a href="#">Editar</a></td>
             </tr>
             {% for t in tirinhas %}
             <tr>
