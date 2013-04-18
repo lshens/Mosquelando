@@ -4,39 +4,58 @@
 {% block content %}
 {% include "/tirinha/templates/tirinha_form.html" %}
 <div class="row">
-    <div class="span1"></div>
+    <div class="span1" style="width: 28px;"></div>
     <div class="span6">
         <h4>Adoro Pásco.....</h4>
         <img src="/static/img/tirinha.jpg" class="img-polaroid">
-
+        <p style="text-align: center;"><i>Agora sabemos por que evoluimos</i></p>
+        <a href="#" class="btn btn-primary"><i class="icon-thumbs-up icon-white"></i></a>
+        <a href="#" class="btn btn-danger"><i class="icon-thumbs-down icon-white"></i></a>
+        <a href="#" class="btn btn-info ">Compartilhar | <i class="icon-globe icon-white"></i></a>
+        <a href="#" class="btn btn-inverse ">Denunciar | <i class="icon-bullhorn icon-white"></i></a>
     </div>
+
     <div class="span3">
         <h4>Envie sua Tirinha: </h4>
         <a data-toggle="modal" href="#myModal" class="btn">Enviar</a>
-        <h2>Seus ultimos envios:</h2>
+        <h3>Seus ultimos envios:</h3>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Titulo</th>
+                <th>Título</th>
                 <th >Likes</th>
                 <th>Gerenciar</th>
-                </tr>
-                </thead>
+            </tr>
+            </thead>
             <tbody>
             <tr>
                 <td>key</td>
-                <td>titulo_tirinha</td>
+                <td>Adoro Pasco..</td>
                 <td>avalicao</td>
-                <td colspan="2"><a href="#">Apagar</a>/<a href="#">Editar</a></td>
+                <td style="text-align: center;">
+                    <a href="#" class="btn btn-danger btn-mini">
+                        <i class="icon-remove"></i>
+                    </a>
+                    <a href="#" class="btn btn-warning btn-mini">
+                        <i class="icon-wrench"></i>
+                    </a>
+                </td>
             </tr>
+
             {% for t in tirinhas %}
             <tr>
                 <td>{{ t.key.id}}</td>
                 <td>{{ t.titulo_tirinha }}</td>
                 <td>{{ t.avalicao }}</td>
-                <td><button type="button" class="btn btn-link"  data-id="{{ t.key.id() }}">Apagar</button></td>
-                <td><button type="button" class="btn btn-link"  data-id="{{ editar_url }}/{{ t.key.urlsafe() }}">Editar</button></td>
+                <td >
+                    <a href="#" class="btn btn-danger btn-mini" data-id="{{ t.key.id() }}">
+                        <i class="icon-remove"></i>
+                    </a>
+                    <a href="#" class="btn btn-warning btn-mini" data-id="{{ editar_url }}/{{ t.key.urlsafe() }}">
+                        <i class="icon-edit"></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>
@@ -47,8 +66,8 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Tag tirinha</th>
-                <th>Vizualições</th>
+                <th>Título</th>
+                <th>Likes</th>
             </tr>
             </thead>
             <tbody>
@@ -60,7 +79,7 @@
             </tbody>
         </table>
     </div>
-    <div class="span1"></div>
+
 </div>
  <ul class="pager">
      <li class="previous">
