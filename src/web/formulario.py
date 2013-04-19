@@ -3,6 +3,6 @@ from __future__ import absolute_import, unicode_literals
 
 
 def index(write_tmpl):
-    write_tmpl('tirinha/templates/tirinha_form.html')
+    write_tmpl('leitura/templates/tirinha_form.html')
 
 

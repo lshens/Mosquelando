@@ -1,5 +1,4 @@
-__author__ = 'lucas.shen'
-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 
@@ -8,4 +7,4 @@ class Tirinha(ndb.Model):
     img_tirinha=ndb.StringProperty;
     legenda=ndb.StringProperty;
     avalicao=ndb.IntegerProperty;
-    data=ndb.DateTimeProperty;
+    data=ndb.StringProperty;

@@ -17,7 +17,7 @@
             <input type="text" name="legenda" value="{{ tirinha.legenda}}" maxlength="30" placeholder="Digite uma legenda "/><br>
             <input type="hidden" name="data" value="{{ tirinha.data}}"/>
             <input type="hidden" name="avaliacao" value="{{ tirinha.avaliacao }}"/>
-            {% if usuario %}
+            {% if tirinha %}
             <input type="hidden" name="id" value="{{ tirinha.id}}"/>
             {% endif %}
         </div>

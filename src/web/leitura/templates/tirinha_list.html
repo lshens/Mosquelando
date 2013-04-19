@@ -1,6 +1,36 @@
 {% extends "/templates/base.html" %}
 {% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
+{% block head %}
+<script type="text/javascript" src="/static/js/mustache.js"></script>
+<script type="text/javascript">
+    var tmpl=null;
+    $.get("/static/html/tirinhas_mustache.html",function(resultado){
+        tmpl=resultado;
+    });
 
+
+    var carregarEnviosConstrutor=function (){
+        var listUrl="{{ list_url }}";
+        var $conteudo=$("#ultimoEnvio");
+        return function(){
+            $.getJSON(listUrl,function(resposta){
+                listUrl=resposta.nextPageUrl;
+                var renderizar=Mustache.render(tmpl,resposta);
+                $conteudo.append(renderizar);
+            });
+        }
+    };
+
+
+    $(document).ready(function(){
+        var carregarEnvios=carregarEnviosConstrutor();
+        carregarEnvios();
+        $("#mais").click(carregarEnvios);
+
+    });
+
+</script>
+{% endblock %}
 {% block content %}
 {% include "/tirinha/templates/tirinha_form.html" %}
 <div class="row">
@@ -19,7 +49,7 @@
         <h4>Envie sua Tirinha: </h4>
         <a data-toggle="modal" href="#myModal" class="btn">Enviar</a>
         <h3>Seus ultimos envios:</h3>
-        <table class="table table-striped">
+        <table class="table table-striped" id="ultimoEnvio">
             <thead>
             <tr>
                 <th>#</th>
@@ -28,39 +58,8 @@
                 <th>Gerenciar</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>key</td>
-                <td>Adoro Pasco..</td>
-                <td>avalicao</td>
-                <td style="text-align: center;">
-                    <a href="#" class="btn btn-danger btn-mini">
-                        <i class="icon-remove"></i>
-                    </a>
-                    <a href="#" class="btn btn-warning btn-mini">
-                        <i class="icon-wrench"></i>
-                    </a>
-                </td>
-            </tr>
-
-            {% for t in tirinhas %}
-            <tr>
-                <td>{{ t.key.id}}</td>
-                <td>{{ t.titulo_tirinha }}</td>
-                <td>{{ t.avalicao }}</td>
-                <td >
-                    <a href="#" class="btn btn-danger btn-mini" data-id="{{ t.key.id() }}">
-                        <i class="icon-remove"></i>
-                    </a>
-                    <a href="#" class="btn btn-warning btn-mini" data-id="{{ editar_url }}/{{ t.key.urlsafe() }}">
-                        <i class="icon-edit"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
         </table>
-        <label><a href="#">...Mais</a></label>
+        <label><button id="mais" class="btn btn-link">...Mais</button></label>
         <h1>TOP 5:</h1>
         <table class="table table-striped">
             <thead>
