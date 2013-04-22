@@ -1,21 +1,28 @@
 {% extends "/templates/base.html" %}
-{% block navbar %}{{ create_navbar("FORM") }} {% endblock %}
+{% block navbar %}{{ create_navbar("LISTA") }} {% endblock %}
 {% block content %}
-<div class="row-fluid" style="padding-top: 10px">
-    <div class="span2"></div>
-    <div class="span8">
-            <label>Imagem do Meme: </label>
-            <div class="input-append">
-                <input class="input-medium" id="appendedInputButtons" type="text" placeholder="Carregue a imagem">
-                <button class="btn" type="button">Carregar</button>
-            </div><br>
-            <label>Título:</label>
-            <input class="input-xlarge" type="text" placeholder="Digite o nome deste meme..."><br>
-            <label>Conteúdo:</label>
-            <textarea class="input-xxlarge" rows="9"></textarea><br>
-            <button class="btn btn-success" type="button">Salvar</button>
-            <button class="btn btn-danger" type="button">Cancelar</button>
-    </div>
-</div>
-
+{% set memes=memes or None %}
+<form action="{{ save_url }}" method="post">
+    <fieldset>
+        <div class="row-fluid" style="padding-top: 10px">
+            <div class="span2"></div>
+            <div class="span8">
+                <label>Imagem do Meme: </label>
+                <div class="input-append">
+                    <input name="img_meme" value="{{ memes.img_meme }}" class="input-medium" id="appendedInputButtons" type="text" placeholder="Carregue a imagem">
+                    <button class="btn" type="button">Carregar</button>
+                </div><br>
+                <label>Título:</label>
+                <input name="titulo" value="{{ memes.titulo }}" class="input-xlarge" type="text" placeholder="Digite o nome deste meme..."><br>
+                <label>Conteúdo:</label>
+                <textarea name="conteudo" value="{{ memes.conteudo }}" class="input-xxlarge" rows="9"></textarea><br>
+                {% if memes %}
+                <input type="hidden" name="id" value="{{ memes.id}}"/>
+                {% endif %}
+                <button class="btn btn-success" type="submit">Salvar</button>
+                <button class="btn btn-danger" type="button">Cancelar</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
 {% endblock %}

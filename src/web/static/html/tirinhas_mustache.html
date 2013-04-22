@@ -2,9 +2,9 @@
 <tr>
     <td>{{ id}}</td>
     <td>{{ titulo }}</td>
-    <td>{{ avalicao }}</td>
+    <td>{{ avaliacao }}</td>
     <td >
-        <button class="btn btn-danger btn-mini" data-id="{{ id() }}">
+        <button class="btn btn-danger btn-mini btn-erase" data-id="{{ id() }}">
             <i class="icon-remove"></i>
         </button>
         <a href="{{ editar_url }}/{{ urlsafe() }}" class="btn btn-warning btn-mini">

@@ -4,7 +4,8 @@
 <div class="row-fluid"  style="padding-top: 10px;">
     <div class="span1"></div>
     <div class="span10">
-        <ul class="media-list">
+        <a href="/historia/memes/form" class="btn btn-info" style="padding-bottom: 5px;">Novo | <i class="icon-plus icon-white"></i></a>
+        <ul class="media-list" style="padding-top: 10px;">
             <li class="media">
                 <a class="pull-left">
                     <img class="media-object" src="/static/img/fuuu.jpg">
@@ -13,28 +14,29 @@
                     <h4 class="media-heading">Rage Guy</h4>
                     <blockquote> O Rage Guy (Cara Furioso, em português) apareceu, primeiramente em 2008, aproximadamente. Ele era usado - e ainda é usado - para ser colocado em tirinhas aonde acontecem coisas do cotidiano que te deixa furioso, fazendo com que você grite "FUUUUUUUUUUUUUUU-". O Rage Guy era exclusivamente apenas do 4chan, até que em 2009 ele foi passando
                             para outros sites, ficando bastante famoso em 2010.</blockquote>
+                    <button class="btn btn-danger btn-mini">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <a class="btn btn-warning btn-mini">
+                        <i class="icon-edit"></i>
+                    </a>
                 </div>
             </li>
-            <li class="media">
-                <a class="pull-right">
-                    <img class="media-object" src="/static/img/okay.jpg">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">Okay Guy</h4>
-                    <blockquote>O Okay Guy, tem quase a mesma história do Rage Guy, foi visto primeiramente no 4chan, em 2010. Logo
-                        depois, foi passando para outros e mais outros sites, se tornando popular rapidamente. É usado nas
-                        mesmas situações do FUUUUU-, mas, ao invés de você ficar muito furioso com a situação, você se conforma
-                        com ela, apenas abaixa a cabeça, fica chateado (ou triste) e diz um simples "Okay".</blockquote>
-                </div>
-            </li>
+
             {% for h in historia %}
             <li class="media">
                 <a class="pull-left">
-                    <img class="media-object" src="{{ h.img_meme }}">
+                    <img class="media-object" src="" alt="{{ h.img_meme }}">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">{{ h.titulo }}</h4>
                     <blockquote>{{ h.conteudo }}</blockquote>
+                    <button class="btn btn-danger btn-mini" data-id="{{ h.id() }}">
+                        <i class="icon-remove"></i>
+                    </button>
+                    <a href="{{ editar_url }}/{{ urlsafe() }}" class="btn btn-warning btn-mini">
+                        <i class="icon-edit"></i>
+                    </a>
                 </div>
             </li>
             {% endfor %}

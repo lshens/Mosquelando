@@ -1,28 +1,29 @@
+{% extends "/templates/base.html" %}
+{% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
+{% block content %}
 {% set tirinha=tirinha or None %}
 <form action="{{ save_url }}" method="post">
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-            <h3 id="miModalLabel">Preencha o formulário: </h3>
-        </div>
-        <div class="modal-body">
-            <div class="input-append">
-                <label>Carregue a imagem: </label>
-                <input class="span2" id="appendedInputButton" type="text" placeholder="Localize o arquivo...">
-                <button class="btn" type="button">Carregar</button>
+    <fieldset>
+        <div class="row">
+            <div class="span4"></div>
+            <div class="span4">
+                <div class="input-append">
+                    <label>Carregue a imagem: </label>
+                    <input class="span2" id="appendedInputButton" type="text" placeholder="Localize o arquivo..." value="{{ tirinha.img_tirinha }}" name="img_tirinha"/>
+                    <button class="btn" type="hidden">Carregar</button>
+                </div>
+                <label>Título: </label>
+                <input type="text" name="titulo_tirinha" value="{{ tirinha.titulo_tirinha}}" maxlength="25" placeholder="Digite o titulo dessa tirinha"/><br>
+                <label>Legenda: </label>
+                <input type="text" name="legenda" value="{{ tirinha.legenda}}" maxlength="30" placeholder="Digite uma legenda "/><br>
+                <input type="hidden" name="data" value="{{ tirinha.data}}"/>
+                <input type="hidden" name="avaliacao" value="{{ tirinha.avaliacao }}"/>
+                {% if tirinha %}
+                <input type="hidden" name="id" value="{{ tirinha.id}}"/>
+                {% endif %}
+                <button class="btn btn-success">Salvar</button> <a class="btn btn-danger" href="/leitura/tirinha/listar"  >Cancelar</a>
             </div>
-            <label>Título: </label>
-            <input type="text" name="titulo_tirinha" value="{{ tirinha.titulo_tirinha}}" maxlength="25" placeholder="Digite o titulo dessa tirinha"/><br>
-            <label>Legenda: </label>
-            <input type="text" name="legenda" value="{{ tirinha.legenda}}" maxlength="30" placeholder="Digite uma legenda "/><br>
-            <input type="hidden" name="data" value="{{ tirinha.data}}"/>
-            <input type="hidden" name="avaliacao" value="{{ tirinha.avaliacao }}"/>
-            {% if tirinha %}
-            <input type="hidden" name="id" value="{{ tirinha.id}}"/>
-            {% endif %}
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-success">Salvar</button> <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        </div>
-    </div>
+    </fieldset>
 </form>
+{% endblock %}

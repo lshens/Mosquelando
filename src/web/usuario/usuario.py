@@ -1,5 +1,4 @@
-__author__ = 'Shen'
-
+# -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 from core.usuario.model import Usuario
@@ -17,7 +16,7 @@ def salvar(handler, user_name, email, senha, avatar, id=None):
     else:
         usuario = Usuario(user_name=user_name, email=email, senha=senha,avatar=avatar)
         #SALVA AS ALTERAÇÕES
-    usuario.put();
+    usuario.put()
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
 
