@@ -19,7 +19,7 @@
                 <input type="hidden" name="data" value="{{ tirinha.data}}"/>
                 <input type="hidden" name="avaliacao" value="{{ tirinha.avaliacao }}"/>
                 {% if tirinha %}
-                <input type="hidden" name="id" value="{{ tirinha.id}}"/>
+                <input type="hidden" name="id" value="{{ tirinha.key.id()}}"/>
                 {% endif %}
                 <button class="btn btn-success">Salvar</button> <a class="btn btn-danger" href="/leitura/tirinha/listar"  >Cancelar</a>
             </div>

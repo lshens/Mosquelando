@@ -1,13 +1,13 @@
 {{#tirinha}}
-<tr>
+<tr data-id="{{ id }}">
     <td>{{ id}}</td>
     <td>{{ titulo }}</td>
     <td>{{ avaliacao }}</td>
-    <td >
-        <button class="btn btn-danger btn-mini btn-erase" data-id="{{ id() }}">
+    <td>
+        <button data-url="{{ apagar_url }}/{{ id }}" data-id="{{ id }}" class="btn btn-erase btn-danger btn-mini">
             <i class="icon-remove"></i>
         </button>
-        <a href="{{ editar_url }}/{{ urlsafe() }}" class="btn btn-warning btn-mini">
+        <a href="{{ editar_url }}/{{ urlsafe }}" class="btn btn-warning btn-mini">
             <i class="icon-edit"></i>
         </a>
     </td>

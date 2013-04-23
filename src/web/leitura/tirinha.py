@@ -31,8 +31,6 @@ def listar(write_tmpl):
     #query = Tirinha.query(Tirinha.get_by_id>0).order(Tirinha.get_by_id)
     #VALORES QUE SERÃO PASSADOS NA URL
     values = {"list_url":router.to_path(listar_ajax)}
-              #"apagar_url":router.to_path(apagar),
-             # "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
     write_tmpl("/leitura/templates/tirinha_list.html",values)
 
@@ -44,13 +42,15 @@ def listar_ajax(resp, offset="0"):
     offset=long(offset)
     tirinha =  query.fetch(PAGE_SIZE,offset=offset)
     #REALIZA O FOR PARA A LISTAGEM NO HTML MUSTACHE
-    tirinha=[{"id":t.key.id(),"titulo":t.titulo_tirinha,"avaliacao":t.avaliacao} for t in tirinha]
+    tirinha=[{"id":t.key.id(),"titulo":t.titulo_tirinha,"avaliacao":t.avaliacao,"urlsafe":t.key.urlsafe()} for t in tirinha]
     #ADD MAIS PAGE_SIZE A PAGINA
     offset+=PAGE_SIZE
     next_page_url=router.to_path(listar_ajax,offset)
     #VALORES QUE SERÃO PASSADOS NA URL
     dct = {"tirinha":tirinha,
-           "nextPageUrl":next_page_url}
+           "nextPageUrl":next_page_url,
+           "editar_url":router.to_path(editar),
+           "apagar_url":router.to_path(apagar)}
     js=json.dumps(dct)
     resp.write(js)
 
@@ -60,7 +60,7 @@ def apagar(handler, id):
     #DELETA O REGISTRO
     key.delete()
     #REDIRECIONA PARA A PAGINA LISTAR
-    handler.redirect(router.to_path(listar))
+    #handler.redirect(router.to_path(listar))
 
 def editar(write_tmpl,urlsafe):
     #
@@ -69,5 +69,5 @@ def editar(write_tmpl,urlsafe):
     tirinha = key.get()
     #CARREGA O VALORES DA PK E MANDA PARA O SALVAR
     values = {"save_url":router.to_path(salvar),
-              "leitura":tirinha}
-    write_tmpl()
+              "tirinha":tirinha}
+    write_tmpl("/leitura/templates/tirinha_form.html",values)

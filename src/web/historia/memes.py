@@ -30,7 +30,7 @@ def listar(write_tmpl):
               "apagar_url":router.to_path(apagar),
               "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
-    write_tmpl("/historia/templates/list.html")
+    write_tmpl("/historia/templates/list.html",values)
 
 def apagar(handler, id):
     #RECEBE O OBJETO MAIS O ID DELE
