@@ -12,12 +12,12 @@ def form(write_tmpl):
     write_tmpl("/leitura/templates/tirinha_form.html",values)
 
 def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, id=None):
-    #SE O ID NÃO EXISTIR ELE CRIA UM NOVO ID E REGISTRO
+    #SE FOR UM ID NO RETORNO ENTÃO ELE SALVA
     if id:
        # data=str(date.today())
         tirinha = Tirinha(id=long(id), img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
                           avaliacao=avaliacao, data=data)
-    #SE ELE POSSUIR UM ID, ELE REALIZA UM UPDATE DO RESGISTRO
+    #SE O  RETORNO NÃO FOR UM ID, POR EXEMPLO A URLSAFE ENTÃO FAZ O UPDATE
     else:
         tirinha = Tirinha(img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
                           avaliacao=avaliacao, data=data)
