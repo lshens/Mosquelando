@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 import unittest
+import json
 from google.appengine.ext import testbed
 from core.tirinha.model import Tirinha
 from core.web import tmpl
@@ -10,6 +11,10 @@ from zen import router
 class HandlerMock(object):
     def redirect(self, url):
         self.url = url
+
+class WriterMock(object):
+    def write(self, json):
+        self.json = json
 
 class TirinhaTests(unittest.TestCase):
     #CRIA UMA INSTACIA DO BANCO POR TESTE
@@ -57,7 +62,16 @@ class TirinhaTests(unittest.TestCase):
         self.assertEquals("0",salvo.avaliacao)
         self.assertEquals("20/06/92",salvo.data)
 
-#    def test_listar_ajax(self):
+    def test_listar_ajax(self):
+        resp = WriterMock()
+        tirinha.listar_ajax(resp)
+        jsonCompara = json.loads(resp.json)
+        self.assertDictEqual({"tirinha":[],
+                              "nextPageUrl":router.to_path(tirinha.listar_ajax,2),
+                              "editar_url":router.to_path(tirinha.editar),
+                              "apagar_url":router.to_path(tirinha.apagar)},
+                              jsonCompara)
+
 
 
 
