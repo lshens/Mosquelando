@@ -23,15 +23,20 @@
                 <li {% if selected_tab=="LISTA" %}class="active" {% endif %}><a href="/historia/memes/form">Lista Memes</a></li>
                 <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar">Leitura Meme</a></li>
                 <li {% if selected_tab=="SOBRE" %}class="active" {% endif %}><a href="/sobre">Sobre</a></li>
-                <!--<li {% if selected_tab=="FORM" %}class="active" {% endif %}><a href="/formulario">Form</a></li>-->
-                <li class="divider"></li>
-                <form class="navbar-form pull-left" style="padding-right: 3px; padding-left: 50px;">
+                <li class="divider">
+
+                <form class="navbar-form">
                     <input type="text" class="search-query span2" placeholder="Pesquisar">
                 </form>
-                <li class="divider"></li>
-                <li {% if selected_tab=="LOGIN" %}class="active" {% endif %}><a href="/login">Login</a></li>
-                <li class="divider"></li>
+                </li>
             </ul>
+            <span class="pull-right">
+                {% if current_user %}
+                    <a class="btn btn-danger" href="{{ logout_url }}"> {{  current_user.user_name}} | Logout</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ login_url }}"><i class="icon-user icon-white"></i> | Login</a>
+                {% endif %}
+            </span>
         </div>
     </div>
     {% endmacro %}

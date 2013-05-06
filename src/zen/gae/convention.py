@@ -1,6 +1,9 @@
 import logging
 import traceback
+from google.appengine.api import users
 import webapp2
+from web.usuarios import usuario
+from core.usuario.model import Usuario
 from core.web import tmpl
 from zen import router
 from zen.router import PathNotFound
@@ -25,7 +28,16 @@ class BaseHandler(webapp2.RequestHandler):
     def make_convetion(self):
         kwargs = dict(_extract_values(self, a) for a in self.request.arguments())
         fcn,params=None,None
+
         def write_template(template_name, values={}):
+            user = Usuario.current_user()
+            if user:
+                values["current_user"]=user
+                values["logout_url"]=users.create_logout_url("/")
+            else:
+                cadastro_url=router.to_path(usuario.form)
+                values["login_url"]=users.create_login_url(cadastro_url)
+
             document=tmpl.render(template_name, values)
             return self.response.write(document)
 

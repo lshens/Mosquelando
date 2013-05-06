@@ -9,7 +9,13 @@
                     <p>Este site é voltado para a criação de tirinhas de MEMES. Se você gosta
                      de ler tirinhas e é criativo, faça seu cadastro e comece a criação das melhores tirinhas!
                     </p>
-                <p><a class="btn btn-primary btn-large" href="/login">Login</a></p>
+                <p>
+                    {% if current_user %}
+                        <!--<a class="btn btn-danger" href="{{ logout_url }}"> {{  current_user.user_name}} | Logout</a>-->
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ login_url }}"><i class="icon-user icon-white"></i> | Login</a>
+                    {% endif %}
+                </p>
                 </div>
                 <ul class="thumbnails">
                     <li class="span4">

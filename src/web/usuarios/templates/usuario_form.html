@@ -1,0 +1,13 @@
+{% extends "/templates/base.html" %}
+{% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
+{% block content %}
+<form action="{{ url_salvar }}" method="post">
+    <fieldset>
+        <label>Nome:</label>
+        <input type="text" name="user_name" placeholder="Digite seu nome completo"/><br>
+        <label>E-mail: </label>
+        <input type="email" name="email" value="{{ email }}" placeholder="ex: mosca@mail.com"/><br>
+    </fieldset>
+    <button class="btn btn-success">Salvar</button>
+</form>
+{% endblock %}

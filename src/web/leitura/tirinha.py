@@ -36,7 +36,7 @@ def listar(write_tmpl):
 
 def listar_ajax(resp, offset="0"):
     PAGE_SIZE=2
-    #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
+    #REALIZA A CONSULTA ORDENA POR ID
     query = Tirinha.query().order(Tirinha.key)
     #DEFINE O QUANTD DE RESULTADOS E O OFFSET
     offset=long(offset)
