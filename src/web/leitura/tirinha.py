@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 import json
-from datetime import date
 from google.appengine.ext import ndb
 from core.tirinha.model import Tirinha
+from core.usuario import seguranca
 from zen import router
 
 
@@ -26,6 +26,7 @@ def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, id=No
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
 
+@seguranca.usuario_logado
 def listar(write_tmpl):
     #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
     #query = Tirinha.query(Tirinha.get_by_id>0).order(Tirinha.get_by_id)

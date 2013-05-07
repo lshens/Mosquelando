@@ -44,8 +44,7 @@ class BaseHandler(webapp2.RequestHandler):
         convention_params = {"req": self.request, "resp": self.response,
                              "handler": self,"write_tmpl":write_template,
                              "tmpl":tmpl}
-
-
+        convention_params["_dependencias"]=convention_params
         try:
             fcn, params = router.to_handler(self.request.path, convention_params, **kwargs)
             fcn(*params, **kwargs)
