@@ -1,6 +1,7 @@
 {% extends "/templates/base.html" %}
-{% block navbar %}{{ create_navbar("LISTA") }} {% endblock %}
+{% block navbar %}{{ create_navbar("GERENCIA") }} {% endblock %}
 {% block content %}
+{% block content_admin %}
 {% set memes=memes or None %}
 <form action="{{ save_url }}" method="post">
     <fieldset>

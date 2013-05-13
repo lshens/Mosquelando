@@ -2,11 +2,13 @@
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 from core.historia.model import Memes
+from core.usuario import seguranca
 from zen import router
 
+@seguranca.usuario_logado
 def form(write_tmpl):
-    values={"save_url":router.to_path(salvar)}
-    write_tmpl("/historia/templates/form.html",values)
+    values = {"save_url":router.to_path(salvar)}
+    write_tmpl("/historia/templates/memes_form.html",values)
 
 def salvar(handler, img_meme,titulo, conteudo, id=None):
     #SE O ID NÃO EXISTIR ELE CRIA UM NOVO ID E REGISTRO
@@ -22,7 +24,7 @@ def salvar(handler, img_meme,titulo, conteudo, id=None):
 
 def listar(write_tmpl):
     #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
-    query = Memes.query(Memes.get_by_id>0).order(Memes.get_by_id)
+    query = Memes.query().order(Memes.key)
     #TRAZ SOMENTE 10 LINHAS DA CONSULTA
     memes =  query.fetch(10)
     #VALORES QUE SERÃO PASSADOS NA URL
@@ -30,7 +32,7 @@ def listar(write_tmpl):
               "apagar_url":router.to_path(apagar),
               "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
-    write_tmpl("/historia/templates/list.html",values)
+    write_tmpl("/historia/templates/memes_list.html",values)
 
 def apagar(handler, id):
     #RECEBE O OBJETO MAIS O ID DELE
@@ -48,4 +50,4 @@ def editar(write_tmpl,urlsafe):
     #CARREGA O VALORES DA PK E MANDA PARA O SALVAR
     values = {"save_url":router.to_path(salvar),
               "memes":memes}
-    write_tmpl("/historia/templates/form.html")
+    write_tmpl("/historia/templates/memes_form.html")

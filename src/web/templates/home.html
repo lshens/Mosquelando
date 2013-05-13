@@ -1,5 +1,4 @@
 {%extends "/templates/base.html" %}
-
 {% block content %}
 <div class="row">
     <div class="span12">
@@ -11,7 +10,7 @@
                     </p>
                 <p>
                     {% if current_user %}
-                        <!--<a class="btn btn-danger" href="{{ logout_url }}"> {{  current_user.user_name}} | Logout</a>-->
+
                     {% else %}
                         <a class="btn btn-primary" href="{{ login_url }}"><i class="icon-user icon-white"></i> | Login</a>
                     {% endif %}
@@ -21,7 +20,7 @@
                     <li class="span4">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3><a href="/lista">Lista Memes</a></h3>
+                                <h3><a href="/historia/memes/listar">Lista Memes</a></h3>
                                 <p>Toda historia dos memes!</p>
                             </div>
                         </div>
@@ -29,7 +28,7 @@
                     <li class="span4">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3><a href="/leitura">Leitura Meme</a></h3>
+                                <h3><a href="/leitura/tirinha/listar">Leitura Meme</a></h3>
                                 <p>Todas as tirinhas para você ler e rir.</p>
                             </div>
                         </div>

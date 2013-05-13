@@ -41,7 +41,7 @@
         }
 
         $.post(url,apagarLinha).error(function(){
-            alert("Deu erro ao apagar estado")
+            alert("Deu erro ao apagar")
         });
     }
     $(document).ready(function(){
@@ -75,35 +75,45 @@
     <div class="span3">
         <h4>Envie sua Tirinha: </h4>
         <a href="/leitura/tirinha/form" class="btn">Enviar</a>
-        <h3>Seus ultimos envios:</h3>
-        <table class="table table-striped" id="envios">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th >Likes</th>
-                <th>Gerenciar</th>
-            </tr>
-            </thead>
-        </table>
-        <label><button id="mais" class="btn btn-link">...Mais</button></label>
-        <h1>TOP 5:</h1>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Título</th>
-                <th>Likes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Alcids</td>
-                <td>700</td>
-            </tr>
-            </tbody>
-        </table>
+        {% if current_user %}
+                <h3>Seus ultimos envios:</h3>
+                <table class="table table-striped" id="envios">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Título</th>
+                        <th >Likes</th>
+                        <th>Gerenciar</th>
+                    </tr>
+                    </thead>
+                </table>
+                <label><button id="mais" class="btn btn-link">...Mais</button></label>
+                <h1>TOP 5:</h1>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Título</th>
+                        <th>Likes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alcids</td>
+                        <td>700</td>
+                    </tr>
+                    </tbody>
+                </table>
+        {% else %}
+            <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px; padding-top: 5px;" alt="PROPAGANDAS GOOGLE">
+            <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="PROPAGANDAS GOOGLE">
+            <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="PROPAGANDAS GOOGLE">
+            <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="FACEBOOK">
+            <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="TWEETER">
+        {% endif %}
+
+
     </div>
 
 </div>
@@ -115,5 +125,4 @@
          <a href="#">Proximo &rarr;</a>
      </li>
  </ul>
-
 {% endblock %}
