@@ -22,8 +22,9 @@
                 <li {% if selected_tab=="INICIO" %}class="active" {% endif %}><a href="/">Inicio</a></li>
                 <li {% if selected_tab=="LISTA" %}class="active" {% endif %}><a href="/historia/memes/listar">Lista Memes</a></li>
                 <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar">Leitura Meme</a></li>
-                 <li {% if selected_tab=="GERENCIA" %}class="active" {% endif %}><a href="/admin/admin">Gerencia</a></li>
+                <li {% if selected_tab=="GERENCIA" %}class="active" {% endif %}><a href="/admin/admin">Gerencia</a></li>
                 <li {% if selected_tab=="SOBRE" %}class="active" {% endif %}><a href="/sobre">Sobre</a></li>
+                <li {% if selected_tab=="UP" %}class="active" {% endif %}><a href="/upload/up">Upload</a></li>
                 <li class="divider">
 
                 <form class="navbar-form">
@@ -33,6 +34,7 @@
             </ul>
             <span class="pull-right">
                 {% if current_user %}
+                    <a href="/down"><img value="{{  current_user.avatar_img(30)}}" /></a>
                     <a class="btn btn-danger" href="{{ logout_url }}"> {{  current_user.user_name}} | Logout</a>
                 {% else %}
                     <a class="btn btn-primary" href="{{ login_url }}"><i class="icon-user icon-white"></i> | Login</a>

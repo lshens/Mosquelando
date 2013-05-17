@@ -23,6 +23,12 @@ handlers:
   static_files: web/\1static\2
   upload: web/.*static.*
 
+- url: /upfile
+  script: web.upfile.app
+
+- url: /down
+  script: web.down.app
+
 - url: .*
   script: zen.gae.convention.app
 

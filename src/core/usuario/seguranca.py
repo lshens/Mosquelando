@@ -11,7 +11,7 @@ def usuario_logado(fcn):
     def wrapper(_dependencias,handler,*args,**kwargs):
         usuario=Usuario.current_user()
         if usuario:
-            novos_argumentos=decorator_util.find_dependencies(_dependencias,fcn)
+            novos_argumentos = decorator_util.find_dependencies(_dependencias,fcn)
             novos_argumentos.extend(args)
             return fcn(*novos_argumentos,**kwargs)
         google_user=users.get_current_user()

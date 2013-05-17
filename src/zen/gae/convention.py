@@ -51,7 +51,6 @@ class BaseHandler(webapp2.RequestHandler):
         except PathNotFound:
             logging.error("Path not Found: " + self.request.path)
             self.response.write("Ocorreu um erro, veja o console")
-            #raise Exception()
         except:
             logging.error((fcn, params, kwargs))
             logging.error(traceback.format_exc())
