@@ -1,11 +1,15 @@
 {% extends "/templates/base.html" %}
 {% block navbar %}{{ create_navbar("UP") }} {% endblock %}
-
 {% block content %}
-<form action="{{ url }}" method="post" enctype="multipart/form-data" >
-    <fieldset>
-        <input type="file" name="file"  />
-    </fieldset>
-    <button type="submit">Salvar</button>
-</form>
+<div class="row-fluid" style="padding-top: 20px;">
+    <div class="span4"></div>
+    <div class="span4">
+        <form action="{{ url }}" method="post" enctype="multipart/form-data" >
+            <fieldset>
+                <input type="file" name="file"  />
+            </fieldset>
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

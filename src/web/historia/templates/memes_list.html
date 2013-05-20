@@ -16,19 +16,14 @@
                 </div>
             </li>
 
-            {% for h in historia %}
+            {% for m in memes %}
             <li class="media">
                 <a class="pull-left">
-                    <img class="media-object" src="" alt="{{ h.img_meme }}">
+                    <img class="media-object" src="{{ m.img_meme }}">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">{{ h.titulo }}</h4>
-                    <blockquote>{{ h.conteudo }}</blockquote>
-                    <button class="btn btn-danger btn-mini" data-id="{{ h.id() }}">
-                        <i class="icon-remove"></i>
-                    </button>
-                    <a href="{{ editar_url }}/{{ urlsafe() }}" class="btn btn-warning btn-mini">
-                        <i class="icon-edit"></i>
+                    <h4 class="media-heading">{{ m.titulo }}</h4>
+                    <blockquote>{{ m.conteudo }}</blockquote>
                     </a>
                 </div>
             </li>

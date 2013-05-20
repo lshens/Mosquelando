@@ -1,18 +1,15 @@
-{% extends "/templates/base.html" %}
-{% block navbar %}{{ create_navbar("GERENCIA") }} {% endblock %}
-{% block content %}
+{% extends "/admin/templates/gerencia.html" %}
 {% block content_admin %}
 {% set memes=memes or None %}
 <form action="{{ save_url }}" method="post">
     <fieldset>
-        <div class="row-fluid" style="padding-top: 10px">
-            <div class="span2"></div>
+        <div class="row" style="padding-top: 20px;">
+            <div class="span1"></div>
             <div class="span8">
                 <label>Imagem do Meme: </label>
                 <div class="input-append">
-                    <input name="img_meme" value="{{ memes.img_meme }}" class="input-medium" id="appendedInputButtons" type="text" placeholder="Carregue a imagem">
-                    <button class="btn" type="button">Carregar</button>
-                </div><br>
+                    <input name="img_meme" value="{{ memes.img_meme }}" class="input-medium" id="appendedInputButtons" type="file" placeholder="Carregue a imagem">
+                </div>
                 <label>Título:</label>
                 <input name="titulo" value="{{ memes.titulo }}" class="input-xlarge" type="text" placeholder="Digite o nome deste meme..."><br>
                 <label>Conteúdo:</label>
@@ -21,7 +18,7 @@
                 <input type="hidden" name="id" value="{{ memes.id}}"/>
                 {% endif %}
                 <button class="btn btn-success" type="submit">Salvar</button>
-                <button class="btn btn-danger" type="button">Cancelar</button>
+                <a href="/admin/admin" class="btn btn-danger" type="button">Cancelar</a>
             </div>
         </div>
     </fieldset>

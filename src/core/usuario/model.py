@@ -7,7 +7,7 @@ class Usuario(ndb.Model):
     user_name = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
     google_id = ndb.StringProperty(required=True)
-    avatar=ndb.BlobKeyProperty()
+    avatar = ndb.BlobKeyProperty()
 
     @classmethod
     def current_user(cls):
@@ -15,6 +15,6 @@ class Usuario(ndb.Model):
         if user:
             return Usuario.query(Usuario.google_id == user.user_id()).get()
 
-    def avatar_img(self,size=15):
+    def avatar_img(self, size=15):
         if self.avatar:
             return images.get_serving_url(self.avatar,size=size)

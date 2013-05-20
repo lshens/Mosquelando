@@ -17,25 +17,35 @@
     {% macro create_navbar(selected_tab="INICIO") %}
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <a href="/" class="brand">Mosquelando</a>
             <ul class="nav">
                 <li {% if selected_tab=="INICIO" %}class="active" {% endif %}><a href="/">Inicio</a></li>
                 <li {% if selected_tab=="LISTA" %}class="active" {% endif %}><a href="/historia/memes/listar">Lista Memes</a></li>
                 <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar">Leitura Meme</a></li>
+                {% if current_user %}
                 <li {% if selected_tab=="GERENCIA" %}class="active" {% endif %}><a href="/admin/admin">Gerencia</a></li>
+                {% endif %}
                 <li {% if selected_tab=="SOBRE" %}class="active" {% endif %}><a href="/sobre">Sobre</a></li>
-                <li {% if selected_tab=="UP" %}class="active" {% endif %}><a href="/upload/up">Upload</a></li>
-                <li class="divider">
-
-                <form class="navbar-form">
-                    <input type="text" class="search-query span2" placeholder="Pesquisar">
-                </form>
+                <li>
+                    <form class="navbar-form">
+                        <div class="input-append">
+                            <input class="span2" id="appendedInputButtons" type="text">
+                            <button class="btn btn-inverse" type="button">Buscar</button>
+                        </div>
+                    </form>
                 </li>
             </ul>
             <span class="pull-right">
                 {% if current_user %}
-                    <a href="/down"><img value="{{  current_user.avatar_img(30)}}" /></a>
-                    <a class="btn btn-danger" href="{{ logout_url }}"> {{  current_user.user_name}} | Logout</a>
+                    <a href="/down"><img class="img-rounded" style="padding-top: 5px;" src="{{  current_user.avatar_img(30)}}" /></a>
+                    <div class="btn-group">
+                        <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">{{  current_user.user_name}} <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="/upload/up">Alterar Avatar</a></li>
+                          <li><a href="#">Editar dados</a></li>
+                          <li class="divider"></li>
+                          <li><a href="{{ logout_url }}">Logout</a></li>
+                        </ul>
+                    </div>
                 {% else %}
                     <a class="btn btn-primary" href="{{ login_url }}"><i class="icon-user icon-white"></i> | Login</a>
                 {% endif %}

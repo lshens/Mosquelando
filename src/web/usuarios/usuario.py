@@ -16,6 +16,6 @@ def form(write_tmpl,handler):
 
 
 def salvar(handler, user_name, email):
-    google_user=users.get_current_user()
+    google_user = users.get_current_user()
     Usuario(user_name=user_name,email=email,google_id=google_user.user_id()).put()
     handler.redirect("/")

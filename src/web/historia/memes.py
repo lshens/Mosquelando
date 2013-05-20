@@ -28,11 +28,23 @@ def listar(write_tmpl):
     #TRAZ SOMENTE 10 LINHAS DA CONSULTA
     memes =  query.fetch(10)
     #VALORES QUE SERÃO PASSADOS NA URL
+    values = {"memes":memes}
+    #MONTA A PAGINA
+    write_tmpl("/historia/templates/memes_list.html",values)
+
+@seguranca.usuario_logado
+def adminlist(write_tmpl):
+    #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
+    query = Memes.query().order(Memes.key)
+    #TRAZ SOMENTE 10 LINHAS DA CONSULTA
+    memes =  query.fetch(10)
+    #VALORES QUE SERÃO PASSADOS NA URL
     values = {"memes":memes,
               "apagar_url":router.to_path(apagar),
               "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
-    write_tmpl("/historia/templates/memes_list.html",values)
+    write_tmpl("/historia/templates/usuario_list.html",values)
+
 
 def apagar(handler, id):
     #RECEBE O OBJETO MAIS O ID DELE
