@@ -43,7 +43,7 @@ def adminlist(write_tmpl):
               "apagar_url":router.to_path(apagar),
               "editar_url":router.to_path(editar)}
     #MONTA A PAGINA
-    write_tmpl("/historia/templates/usuario_list.html",values)
+    write_tmpl("/historia/templates/memes_listadmin.html",values)
 
 
 def apagar(handler, id):

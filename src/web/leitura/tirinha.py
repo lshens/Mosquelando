@@ -4,6 +4,7 @@ import json
 from google.appengine.ext import ndb
 from core.tirinha.model import Tirinha
 from core.usuario import seguranca
+from core.usuario.model import Usuario
 from zen import router
 
 @seguranca.usuario_logado
@@ -11,34 +12,42 @@ def form(write_tmpl):
     values={"save_url":router.to_path(salvar)}
     write_tmpl("/leitura/templates/tirinha_form.html",values)
 
-def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, id=None):
+def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, usuario_id=None, id=None):
     #SE FOR UM ID NO RETORNO ENTÃO ELE SALVA
+    if usuario_id is None:
+        usuario_id = Usuario.current_user().key.id()
+    usuario_id = long(usuario_id)
+    usuario_key = ndb.Key(Usuario,usuario_id)
     if id:
        # data=str(date.today())
         tirinha = Tirinha(id=long(id), img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
-                          avaliacao=avaliacao, data=data)
+                          avaliacao=avaliacao, data=data, usuario=usuario_key)
     #SE O  RETORNO NÃO FOR UM ID, POR EXEMPLO A URLSAFE ENTÃO FAZ O UPDATE
     else:
         tirinha = Tirinha(img_tirinha=img_tirinha, titulo_tirinha=titulo_tirinha, legenda=legenda,
-                          avaliacao=avaliacao, data=data)
+                          avaliacao=avaliacao, data=data, usuario=usuario_key)
     #SALVA AS ALTERAÇÕES
     tirinha.put()
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
 
 
-def listar(write_tmpl):
-    #REALIZA A CONSULTA PELOS ID MAIORES QUE 0 E ORDENA POR ID
-    #query = Tirinha.query(Tirinha.get_by_id>0).order(Tirinha.get_by_id)
+def listar(write_tmpl,usuario_id=None):
+    if usuario_id is None:
+        usuario_id = Usuario.current_user().key.id()
+    usuario_id = long(usuario_id)
+    usuario = Usuario.get_by_id(usuario_id)
     #VALORES QUE SERÃO PASSADOS NA URL
-    values = {"list_url":router.to_path(listar_ajax)}
+    values = {"list_url":router.to_path(listar_ajax,usuario)}
     #MONTA A PAGINA
     write_tmpl("/leitura/templates/tirinha_list.html",values)
 
-def listar_ajax(resp, offset="0"):
+def listar_ajax(resp,usuario_id, offset="0"):
     PAGE_SIZE=2
+    usuario_id = long(usuario_id)
+    usuario_key=ndb.Key(Usuario,usuario_id)
     #REALIZA A CONSULTA ORDENA POR ID
-    query = Tirinha.query().order(Tirinha.key)
+    query = Tirinha.query(Tirinha.usuario == usuario_key).order(Tirinha.key)
     #DEFINE O QUANTD DE RESULTADOS E O OFFSET
     offset=long(offset)
     tirinha =  query.fetch(PAGE_SIZE,offset=offset)

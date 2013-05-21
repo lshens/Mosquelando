@@ -6,41 +6,24 @@
         <table class="table table-bordered">
             <thead>
                 <tr class="info">
-                    <th>Nome meme</th>
-                    <th>Conteudo</th>
-                    <th>Imagem meme</th>
+                    <th>Nome do Usuário</th>
+                    <th>Email</th>
                     <th>Editar</th>
                     <th>Remover</th>
                 </tr>
             </thead>
             <tbody>
+              {% for u in usuario %}
                 <tr>
-                    <td>titulo</td>
-                    <td>cotente</td>
-                    <td>meme</td>
+                    <td>{{ u.user_name }}</td>
+                    <td>{{ u.email }}</td>
                     <td>
-                        <button class="btn btn-danger btn-mini">
+                        <button class="btn btn-danger btn-mini" data-id="{{ u.key.id() }}">
                             <i class="icon-remove"></i>
                         </button>
                     </td>
                     <td>
-                        <a href="" class="btn btn-warning btn-mini">
-                            <i class="icon-edit"></i>
-                        </a>
-                    </td>
-                </tr>
-              {% for m in memes %}
-                <tr>
-                    <td>{{ m.titulo }}</td>
-                    <td>{{ m.conteudo }}</td>
-                    <td>{{ m.img_meme }}</td>
-                    <td>
-                        <button class="btn btn-danger btn-mini" data-id="{{ m.id() }}">
-                            <i class="icon-remove"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <a href="{{ editar_url }}/{{ urlsafe() }}" class="btn btn-warning btn-mini">
+                        <a href="{{ editar_url }}/{{ urlsafe }}" class="btn btn-warning btn-mini">
                             <i class="icon-edit"></i>
                         </a>
                     </td>
