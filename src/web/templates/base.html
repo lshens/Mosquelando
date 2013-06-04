@@ -12,7 +12,7 @@
 <body>
 <div id="header" class="container">
     <div id="logo" >
-        <a href="/"><img class="logo-img" src="/static/img/logo.fw.png" alt="memetizando"/></a>
+        <a href="/"><img src="/static/img/logo.fw.png" class="logo-img img-rounded" alt="mosquelando"/></a>
     </div>
     {% macro create_navbar(selected_tab="INICIO") %}
     <div class="navbar navbar-inverse">
@@ -42,6 +42,7 @@
                         <ul class="dropdown-menu">
                           <li><a href="/upload/up">Alterar Avatar</a></li>
                           <li><a href="#">Editar dados</a></li>
+                          <li><a href="#">Meu envios</a></li>
                           <li class="divider"></li>
                           <li><a href="{{ logout_url }}">Logout</a></li>
                         </ul>
