@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/static/js/mustache.js"></script>
 <script type="text/javascript">
     var tmpl=null;
-    $.get("/static/html/tirinhas_mustache.html",function(resultado){
+    $.get("/static/html/tirinhas_mustache_all.html",function(resultado){
         tmpl=resultado;
     });
     var carregarEnviosConstrutor=function (){
@@ -28,32 +28,11 @@
     
     
 </script>
-<script type="text/javascript">
-
-    function apagarTirinha() {
-        var tirinhaId=$(this).attr("data-id");
-        var url=$(this).attr("data-url");
-        var loader=$("img[data-id="+ tirinhaId +"]")
-        loader.fadeIn();
-        alert(tirinhaId);
-        function apagarLinha(){
-            $('tr[data-id='+tirinhaId+']').fadeOut();
-        }
-
-        $.post(url,apagarLinha).error(function(){
-            alert("Deu erro ao apagar")
-        });
-    }
-    $(document).ready(function(){
-        $("#envios").delegate(".btn-erase","click",apagarTirinha);
-        $(".loader").hide();
-    });
-</script>
 {% endblock %}
 {% block content %}
 <div class="row">
     <div class="span1" style="width: 28px;"></div>
-    <div class="span6">
+    <div class="span6" id="envios">
         <h4>Adoro Pásco.....</h4>
         <img src="/static/img/tirinha.jpg" class="img-polaroid">
         <p style="text-align: center;"><i>Agora sabemos por que evoluimos</i></p>
@@ -61,15 +40,6 @@
         <a href="#" class="btn btn-danger"><i class="icon-thumbs-down icon-white"></i></a>
         <a href="#" class="btn btn-info ">Compartilhar | <i class="icon-globe icon-white"></i></a>
         <a href="#" class="btn btn-inverse ">Denunciar | <i class="icon-bullhorn icon-white"></i></a>
-        {% for t in tirinha %}
-            <h4>{{ t.titulo_tirinha }}</h4>
-            <img src="" class="img-polaroid" alt="{{ t.img_tirinha }}">
-            <p style="text-align: center;"><i>{{ t.legenda }}</i></p>
-            <a href="#" class="btn btn-primary"><i class="icon-thumbs-up icon-white"></i></a>
-            <a href="#" class="btn btn-danger"><i class="icon-thumbs-down icon-white"></i></a>
-            <a href="#" class="btn btn-info ">Compartilhar | <i class="icon-globe icon-white"></i></a>
-            <a href="#" class="btn btn-inverse ">Denunciar | <i class="icon-bullhorn icon-white"></i></a>
-        {% endfor %}
     </div>
 
     <div class="span3">
@@ -88,7 +58,7 @@
          <a href="#">&larr; Anterior</a>
      </li>
      <li class="next">
-         <a href="#">Proximo &rarr;</a>
+         <a href="#" id="mais">Proximo &rarr;</a>
      </li>
  </ul>
 {% endblock %}

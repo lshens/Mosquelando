@@ -2,15 +2,17 @@
 from __future__ import absolute_import, unicode_literals
 import json
 from google.appengine.ext import ndb
+from google.appengine.ext.blobstore import blobstore
 from core.tirinha.model import Tirinha
 from core.usuario import seguranca
 from core.usuario.model import Usuario
 from zen import router
 
-@seguranca.usuario_logado
+
 def form(write_tmpl):
-    values={"save_url":router.to_path(salvar)}
-    write_tmpl("/leitura/templates/tirinha_form.html",values)
+    url_tirinha = blobstore.create_upload_url("/uptirinha")
+    values = {"url_tirinha": url_tirinha}
+    write_tmpl("/leitura/templates/tirinha_form.html", values)
 
 @seguranca.usuario_logado
 def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, usuario_id=None, id=None):
@@ -66,7 +68,9 @@ def listar_ajax(resp,usuario_id, offset="0"):
     resp.write(js)
 
 def listar_all(write_tmpl):
-    values = {"list_url"}
+    values = {"list_url":router.to_path(listar_all_ajax)}
+    write_tmpl("/leitura/templates/tirinha_list_all.html", values)
+
 def listar_all_ajax(resp,offset="0"):
     PAGE_SIZE=2
     query = Tirinha.query().order(Tirinha.data)
@@ -74,14 +78,11 @@ def listar_all_ajax(resp,offset="0"):
     tirinha = query.fetch(PAGE_SIZE, offset=offset)
     tirinha = [{"titulo":t.titulo_tirinha, "legenda":t.legenda, "imgt":t.img_tirinha} for t in tirinha]
     offset += PAGE_SIZE
-    next_page_url = router.to_path(listar_ajax,offset)
+    next_page_url = router.to_path(listar_all_ajax,offset)
     dct = {"tirinha":tirinha,
            "nextPageUrl":next_page_url}
     js = json.dumps(dct)
     resp.write(js)
-
-
-
 
 def apagar(id):
     #RECEBE O OBJETO MAIS O ID DELE

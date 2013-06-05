@@ -6,6 +6,6 @@ from core.usuario import seguranca
 
 @seguranca.usuario_logado
 def index(write_tmpl):
-    url=blobstore.create_upload_url("/upfile")
-    values={"url":url}
+    url = blobstore.create_upload_url("/upfile")
+    values = {"url": url}
     write_tmpl("/upload/templates/upload.html",values)

@@ -26,6 +26,9 @@ handlers:
 - url: /upfile
   script: web.upfile.app
 
+- url: /uptirinha
+  script: web.uptirinha.app
+
 - url: /down
   script: web.down.app
 

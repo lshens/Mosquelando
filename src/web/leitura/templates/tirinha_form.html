@@ -2,22 +2,18 @@
 {% block navbar %}{{ create_navbar("LEITURA") }} {% endblock %}
 {% block content %}
 {% set tirinha=tirinha or None %}
-<form action="{{ save_url }}" method="post">
+<form action="{{url_tirinha }}" method="post" enctype="multipart/form-data">
     <fieldset>
         <div class="row">
             <div class="span4"></div>
             <div class="span4">
-                <div class="input-append">
-                    <label>Carregue a imagem: </label>
-                    <input class="span2" id="appendedInputButton" type="text" placeholder="Localize o arquivo..." value="{{ tirinha.img_tirinha }}" name="img_tirinha"/>
-                    <button class="btn" type="hidden">Carregar</button>
-                </div>
+                <label>Carregue a imagem: </label>
+                <input type="file" name="file"  />
                 <label>Título: </label>
                 <input type="text" name="titulo_tirinha" value="{{ tirinha.titulo_tirinha}}" maxlength="25" placeholder="Digite o titulo dessa tirinha"/><br>
                 <label>Legenda: </label>
                 <input type="text" name="legenda" value="{{ tirinha.legenda}}" maxlength="30" placeholder="Digite uma legenda "/><br>
-                <input type="hidden" name="data" value="{{ tirinha.data}}"/>
-                <input type="hidden" name="avaliacao" value="{{ tirinha.avaliacao }}"/>
+
                 {% if tirinha %}
                 <input type="hidden" name="id" value="{{ tirinha.key.id()}}"/>
                 {% endif %}
