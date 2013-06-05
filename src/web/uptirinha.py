@@ -22,11 +22,10 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
             usuario_id = long(usuario_id)
             usuario_key = ndb.Key(Usuario,usuario_id)
             if id:
-                tirinha = Tirinha(id=long(id), img_tirinha=blob_key, titulo_tirinha=titulo_tirinha, legenda=legenda,
-                                  usuario=usuario_key)
+                tirinha = Tirinha(id=long(id), imgtirinha=blob_key, titulo_tirinha=titulo_tirinha, legenda=legenda, usuario=usuario_key)
             else:
-                tirinha = Tirinha(img_tirinha=blob_key, titulo_tirinha=titulo_tirinha, legenda=legenda,
-                                  usuario=usuario_key)
+                tirinha = Tirinha(titulo_tirinha=titulo_tirinha, legenda=legenda, usuario=usuario_key)
+                tirinha.imgtirinha = blob_key
             tirinha.put()
             self.redirect("/leitura/tirinha/listar_all")
 

@@ -76,7 +76,7 @@ def listar_all_ajax(resp,offset="0"):
     query = Tirinha.query().order(Tirinha.data)
     offset = long(offset)
     tirinha = query.fetch(PAGE_SIZE, offset=offset)
-    tirinha = [{"titulo":t.titulo_tirinha, "legenda":t.legenda, "imgt":t.img_tirinha} for t in tirinha]
+    tirinha = [{"titulo": t.titulo_tirinha, "legenda": t.legenda, "imgt": t.img()} for t in tirinha]
     offset += PAGE_SIZE
     next_page_url = router.to_path(listar_all_ajax,offset)
     dct = {"tirinha":tirinha,
