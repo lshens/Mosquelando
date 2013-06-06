@@ -30,9 +30,9 @@
 </script>
 {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="span1" style="width: 28px;"></div>
-    <div class="span6" id="envios">
+<div class="row pads">
+    <div class="span1"></div>
+    <div class="span6"  id="envios">
         <h4>Adoro Pásco.....</h4>
         <img src="/static/img/tirinha.jpg" class="img-polaroid">
         <p style="text-align: center;"><i>Agora sabemos por que evoluimos</i></p>
@@ -51,14 +51,11 @@
         <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="FACEBOOK">
         <img class="span4" style="width: 295px; height: 140px; padding-bottom: 5px;" alt="TWEETER">
     </div>
-
 </div>
- <ul class="pager">
-     <li class="previous">
-         <a href="#">&larr; Anterior</a>
-     </li>
-     <li class="next">
-         <a href="#" id="mais">Proximo &rarr;</a>
-     </li>
- </ul>
+<div class="row pads">
+    <div class="span1"></div>
+    <div class="span6">
+        <a class="btn btn-warning" id="mais"><i class="icon-refresh icon-white"></i> | Mais</a>
+    </div>
+</div>
 {% endblock %}

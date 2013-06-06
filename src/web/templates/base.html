@@ -20,8 +20,7 @@
             <ul class="nav">
                 <li {% if selected_tab=="INICIO" %}class="active" {% endif %}><a href="/">Inicio</a></li>
                 <li {% if selected_tab=="LISTA" %}class="active" {% endif %}><a href="/historia/memes/listar">Lista Memes</a></li>
-                <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar">Leitura Meme</a></li>
-                <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar_all">Leitura Meme2</a></li>
+                <li {% if selected_tab=="LEITURA" %}class="active" {% endif %}><a href="/leitura/tirinha/listar_all">Leitura Meme</a></li>
                 {% if current_user %}
                 <li {% if selected_tab=="GERENCIA" %}class="active" {% endif %}><a href="/admin/admin">Gerencia</a></li>
                 {% endif %}

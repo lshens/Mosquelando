@@ -23,6 +23,9 @@
     border-radius: 6px;
 }
 
+.pads {
+    padding-top: 10px;
+}
 body {
     background-color: #949494;
     background-image: url("/../static/img/mosca.png");

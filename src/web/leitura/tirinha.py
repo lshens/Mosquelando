@@ -3,16 +3,28 @@ from __future__ import absolute_import, unicode_literals
 import json
 from google.appengine.ext import ndb
 from google.appengine.ext.blobstore import blobstore
+from google.appengine.ext.blobstore.blobstore import BlobInfo
 from core.tirinha.model import Tirinha
 from core.usuario import seguranca
 from core.usuario.model import Usuario
 from zen import router
 
-
+@seguranca.usuario_logado
 def form(write_tmpl):
     url_tirinha = blobstore.create_upload_url("/uptirinha")
     values = {"url_tirinha": url_tirinha}
     write_tmpl("/leitura/templates/tirinha_form.html", values)
+
+@seguranca.usuario_logado
+def listar(write_tmpl,usuario_id=None):
+    if usuario_id is None:
+        usuario_id = Usuario.current_user().key.id()
+    usuario_id = long(usuario_id)
+    usuario = Usuario.get_by_id(usuario_id)
+    #VALORES QUE SERÃO PASSADOS NA URL
+    values = {"list_url":router.to_path(listar_ajax,usuario)}
+    #MONTA A PAGINA
+    write_tmpl("/leitura/templates/tirinha_list.html",values)
 
 @seguranca.usuario_logado
 def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, usuario_id=None, id=None):
@@ -34,17 +46,7 @@ def salvar(handler, img_tirinha, titulo_tirinha, legenda, avaliacao, data, usuar
     #REDIRECIONA PARA O LISTAR
     handler.redirect(router.to_path(listar))
 
-
-def listar(write_tmpl,usuario_id=None):
-    if usuario_id is None:
-        usuario_id = Usuario.current_user().key.id()
-    usuario_id = long(usuario_id)
-    usuario = Usuario.get_by_id(usuario_id)
-    #VALORES QUE SERÃO PASSADOS NA URL
-    values = {"list_url":router.to_path(listar_ajax,usuario)}
-    #MONTA A PAGINA
-    write_tmpl("/leitura/templates/tirinha_list.html",values)
-
+@seguranca.usuario_logado
 def listar_ajax(resp,usuario_id, offset="0"):
     PAGE_SIZE = 2
     usuario_id = long(usuario_id)
@@ -72,10 +74,11 @@ def listar_all(write_tmpl):
     write_tmpl("/leitura/templates/tirinha_list_all.html", values)
 
 def listar_all_ajax(resp,offset="0"):
-    PAGE_SIZE=2
+    PAGE_SIZE = 2
     query = Tirinha.query().order(Tirinha.data)
     offset = long(offset)
     tirinha = query.fetch(PAGE_SIZE, offset=offset)
+    #BlobInfo.properties(tirinha.imgtirinha)
     tirinha = [{"titulo": t.titulo_tirinha, "legenda": t.legenda, "imgt": t.img()} for t in tirinha]
     offset += PAGE_SIZE
     next_page_url = router.to_path(listar_all_ajax,offset)
