@@ -75,7 +75,7 @@ def listar_all(write_tmpl):
 
 def listar_all_ajax(resp,offset="0"):
     PAGE_SIZE = 2
-    query = Tirinha.query().order(Tirinha.data)
+    query = Tirinha.query().order(-Tirinha.data)
     offset = long(offset)
     tirinha = query.fetch(PAGE_SIZE, offset=offset)
     #BlobInfo.properties(tirinha.imgtirinha)

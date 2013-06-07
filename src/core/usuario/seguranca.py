@@ -22,3 +22,21 @@ def usuario_logado(fcn):
             login_url=users.create_login_url(url)
             handler.redirect(login_url)
     return wrapper
+
+def usuario_admin(fcn):
+    def wrapper(_dependencias, handler, *args, **kwargs):
+        user = Usuario.current_user()
+        if user:
+            if user.tipo == "admin":
+                novos_argumentos = decorator_util.find_dependencies(_dependencias, fcn)
+                novos_argumentos.extend(args)
+                return fcn(*novos_argumentos, **kwargs)
+            else:
+                handler.redirect("/")
+        google_user = users.get_current_user()
+        if google_user:
+            handler.redirect(router.to_path(usuario.form))
+        else:
+            login_url = users.create_login_url("/")
+            handler.redirect(login_url)
+    return wrapper
