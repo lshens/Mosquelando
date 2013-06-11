@@ -10,7 +10,7 @@ class Tirinha(ndb.Model):
     titulo_tirinha = ndb.StringProperty(required=True)
     imgtirinha = ndb.BlobKeyProperty()
     legenda = ndb.StringProperty(required=True)
-    avaliacao = ndb.StringProperty
+    avaliacao = ndb.StringProperty()
     data = ndb.DateTimeProperty(auto_now_add=True)
     usuario = ndb.KeyProperty(Usuario)
 

@@ -58,19 +58,20 @@
         <a href="/leitura/tirinha/form" class="btn">Enviar</a>
         {% if current_user %}
                 <h3>Seus ultimos envios:</h3>
-                <table class="table table-striped" id="envios">
+                <table class="table table-bordered" id="envios">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Título</th>
+                        <th class="span2">Título</th>
+                        <th>Legenda</th>
                         <th >Likes</th>
                         <th>Gerenciar</th>
                     </tr>
                     </thead>
                 </table>
-                <label><button id="mais" class="btn btn-link">...Mais</button></label>
+                <button id="mais" class="btn btn-warning"><i class="icon-hdd"></i> | Antigas</button>
                 <h1>TOP 5:</h1>
-                <table class="table table-striped">
+                <table class="table table-ordered">
                     <thead>
                     <tr>
                         <th>#</th>
